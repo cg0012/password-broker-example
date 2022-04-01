@@ -15,14 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'coaches'], function () {
-    Route::get('/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('coaches.showResetForm');
-    Route::get('/resetemail/{user_type}', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('coaches.showResetEmailForm');
-    Route::post('/reset', 'Auth\ResetPasswordController@reset')->name('coaches.password.update');
-});
-
-Route::group(['prefix' => 'admins'], function () {
-    Route::get('/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('admins.showResetForm');
-    Route::get('/resetemail/{user_type}', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('admins.showResetEmailForm');
-    Route::post('/reset', 'Auth\ResetPasswordController@reset')->name('admins.password.update');
-});
+Route::get('{user_type}/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('broker.showResetForm');
+Route::get('{user_type}/resetemail/', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('broker.showResetEmailForm');
+Route::post('{user_type}/reset', 'Auth\ResetPasswordController@reset')->name('broker.password.update');
